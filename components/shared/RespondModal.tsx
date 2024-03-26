@@ -84,7 +84,7 @@ const handleSubmit = async () => {
        </CardHeader>
        <CardContent>
          <Form {...form}>
-         <form onSubmit={form.handleSubmit((data) => handleSubmit(data))}> // Pass form data directly
+        <form onSubmit={form.handleSubmit(() => handleSubmit())}> // Pass form data directly
              <div className="grid w-full items-center gap-4">
                <div className="flex flex-col space-y-1.5">
                  <Label htmlFor="name">Name</Label>
