@@ -33,8 +33,12 @@ export const handleDeleteTicket = (ticketId: string, openModalForTicketDelete: (
     openModalForTicketDelete(ticketId);
 }
 
+export const handleRespondToTicket = (ticketId: string, openModalForTicketRespond: (ticketId: string) => void) => {
+    openModalForTicketRespond(ticketId);
+}
 
-export const columns = (openModalForTicketUpdate: (ticketId: string) => void, openModalForTicketDelete: (ticketId: string) => void): ColumnDef<SupportTicketParams>[] => [
+
+export const columns = (openModalForTicketUpdate: (ticketId: string) => void, openModalForTicketDelete: (ticketId: string) => void, openModalForTicketRespond: (ticketId: string) => void): ColumnDef<SupportTicketParams>[] => [
     {
     accessorKey: "status",
     header: "Status",
@@ -107,6 +111,7 @@ export const columns = (openModalForTicketUpdate: (ticketId: string) => void, op
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => handleUpdateTicket(ticket._id, openModalForTicketUpdate)}>Update Ticket</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleRespondToTicket(ticket._id, openModalForTicketRespond)}>Respond To Ticket</DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleDeleteTicket(ticket._id, openModalForTicketDelete)}>Delete Ticket</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { getAllTickets } from '@/lib/actions/supportTicket.actions';
 import { SupportTicketParams } from '@/lib/types/SupportTicketParams';
 
-import { columns, handleUpdateTicket } from '@/components/shared/Columns';
+import { columns, handleUpdateTicket} from '@/components/shared/Columns';
 import { DataTable } from '@/components/shared/Data-Table';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Modal } from '@/components/shared/Modal';
+import { RespondModal } from '@/components/shared/RespondModal';
 import { fetchTicketById } from '@/lib/actions/supportTicket.actions';
 
 import { DeleteAlert } from '@/components/shared/DeleteAlert';
@@ -25,6 +26,7 @@ const [supportTickets, setSupportTickets] = useState<SupportTicketParams[]>([]);
 const [selectedTicket, setSelectedTicket] = useState<SupportTicketParams | null>(null);
 const [alert, setAlert] = useState(false);
 const [openModal, setOpenModal] = useState(false);
+const [openRespondModal, setOpenRespondModal] = useState(false);
 
 
 const openModalForTicketUpdate = async (ticketId: string) => {
@@ -47,6 +49,16 @@ const openModalForTicketDelete = async (ticketId: string) => {
         console.error('Error fetching ticket for deletion:', error);
     }
 };
+
+const openModalForTicketRespond = async (ticketId: string) => {
+    try {
+        const fetchedTicket = await fetchTicketById(ticketId);
+        setSelectedTicket(fetchedTicket);
+        setOpenRespondModal(true);
+    } catch (error) {
+        console.error('Error fetching ticket for response:', error);
+    }
+}
 
 const fetchTickets = async () => {
     try {
@@ -76,14 +88,22 @@ const handleUpdateSuccess = async () => {
     ) : (
       <>
         <DataTable
-          columns={columns(openModalForTicketUpdate, openModalForTicketDelete)}
+          columns={columns(openModalForTicketUpdate, openModalForTicketDelete, openModalForTicketRespond)}
           data={supportTickets}
           openModalForTicketDelete={openModalForTicketDelete}
           openModalForTicketUpdate={openModalForTicketUpdate}
+          openModalForTicketRespond={openModalForTicketRespond}
         />
         {openModal && (
           <Modal
             onClose={() => setOpenModal(false)}
+            ticketData={selectedTicket}
+            onUpdateSuccess={handleUpdateSuccess}
+          />
+        )}
+        {openRespondModal && (
+          <RespondModal
+            onClose={() => setOpenRespondModal(false)}
             ticketData={selectedTicket}
             onUpdateSuccess={handleUpdateSuccess}
           />

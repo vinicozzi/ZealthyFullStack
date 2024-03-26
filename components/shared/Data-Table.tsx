@@ -40,6 +40,7 @@ import { Input } from "../ui/input";
 interface DataTableProps<TData, TValue> {
     openModalForTicketUpdate: (ticketId: string) => Promise<void>;
     openModalForTicketDelete: (ticketId: string) => Promise<void>;
+    openModalForTicketRespond: (ticketId: string) => Promise<void>;
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
