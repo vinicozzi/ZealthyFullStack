@@ -14,8 +14,9 @@ interface MobileListProps {
 }
 
 export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTicket, handleDeleteTicket }: MobileListProps) {
-  const pageSize = 5; 
+  const pageSize = 4; 
   const [currentPage, setCurrentPage] = useState(1);
+  const [expandedTicket, setExpandedTicket] = useState<string | null>(null);
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize, ticketData.length);
@@ -27,15 +28,19 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
     setCurrentPage(page);
   };
 
+  const toggleTicketExpansion = (ticketId: string) => {
+    setExpandedTicket((prevState) => (prevState === ticketId ? null : ticketId));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="w-full space-y-4">
         {displayedTickets.map((ticket) => (
-          <div key={ticket._id} className="bg-white rounded-lg shadow-md text-xs max-w-lg p-4">
+          <div key={ticket._id} className="bg-white rounded-lg shadow-md text-xs max-w-lg p-4" onClick={() => toggleTicketExpansion(ticket._id)}>
             <div className="flex">
               <div className="w-1/2 pr-2">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-black">{ticket.name}</p>
+                  <p className="text-black text-sm">{ticket.name}</p>
                   <p className="text-black">{ticket.email}</p>
                 </div>
               </div>
@@ -45,6 +50,11 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
                 </div>
               </div>
             </div>
+            {expandedTicket === ticket._id && (
+              <div className="mt-2">
+                <p className="text-xs font-semibold text-gray-900">{ticket.description}</p>
+              </div>
+            )}
             <div className="flex justify-between mt-2 text-xs">
               <div>
                 <label className="text-gray-500">
@@ -75,10 +85,24 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
           </div>
         ))}
       </div>
-      <div className="flex mt-4">
-        <Button disabled={currentPage === 1} onClick={() => goToPage(currentPage - 1)}>Previous</Button>
-        <span className="mx-2">Page {currentPage} of {totalPages}</span>
-        <Button disabled={currentPage === totalPages} onClick={() => goToPage(currentPage + 1)}>Next</Button>
+      <div className="flex items-center mt-8 space-x-2">
+        <Button 
+          disabled={currentPage === 1} 
+          onClick={() => goToPage(currentPage - 1)}
+          className="bg-blue-500 text-white hover:bg-blue-600"
+        >
+          Previous
+        </Button>
+        <span className="text-sm">
+          Page {currentPage} of {totalPages}
+        </span>
+        <Button 
+          disabled={currentPage === totalPages} 
+          onClick={() => goToPage(currentPage + 1)}
+          className="bg-blue-500 text-white hover:bg-blue-600"
+        >
+          Next
+        </Button>
       </div>
     </div>
   );
