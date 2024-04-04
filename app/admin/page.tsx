@@ -8,7 +8,7 @@ import { DataTable } from '@/components/shared/Data-Table';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Modal } from '@/components/shared/Modal';
+import { Modal } from '@/components/shared/UpdateModal';
 import { RespondModal } from '@/components/shared/RespondModal';
 import { fetchTicketById } from '@/lib/actions/supportTicket.actions';
 
@@ -78,7 +78,7 @@ const handleUpdateSuccess = async () => {
     const [isMobile, setIsMobile] = useState(false); 
 
   const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768); 
+    setIsMobile(window.innerWidth <= 1400); 
   };
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const handleUpdateSuccess = async () => {
           </div>
         ) : (
           <>
-            <div className="md:flex md:flex-col">
+            <div className="md:flex md:flex-col bg-white">
               {isMobile ? (
               <MobileList 
                 ticketData={supportTickets}

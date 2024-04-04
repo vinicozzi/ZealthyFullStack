@@ -46,7 +46,7 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 ">
+    <div className="flex flex-col items-center justify-center p-4 bg-white ">
       <div className="w-full space-y-4">
         <div className="flex space-x-4">
           <select
@@ -74,7 +74,7 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
         </div>
         {displayedTickets.map((ticket) => (
           <div key={ticket._id} className="bg-white rounded-lg shadow-md text-xs max-w-lg p-4">
-            <div className="flex">
+            <div className="flex justify-center">
               <div className="w-1/2 pr-2">
                 <div className="flex flex-col space-y-1">
                   <p className="text-black text-sm">{ticket.name}</p>
@@ -120,6 +120,7 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
           </div>
         ))}
       </div>
+      
       {displayedTickets.length === 0? (
           <div className="text-center text-gray-500 mt-4 font-bold">No results found</div>
           ) : (
