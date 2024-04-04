@@ -9,19 +9,11 @@ import {
  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
- Select,
- SelectContent,
- SelectItem,
- SelectTrigger,
- SelectValue,
-} from "@/components/ui/select";
+
 
 import { Form } from "../ui/form";
 import { SupportTicketParams } from "@/lib/types/SupportTicketParams";
 import { useForm } from "react-hook-form";
-import { Dropdown } from 'flowbite-react';
 
 interface ModalProps {
    ticketData: SupportTicketParams | null;
@@ -87,19 +79,19 @@ const handleSubmit = async () => {
         <form onSubmit={form.handleSubmit(() => handleSubmit())}> 
              <div className="grid w-full items-center gap-4">
                <div className="flex flex-col space-y-1.5">
-                 <Label htmlFor="name">Name</Label>
+                 <label htmlFor="name">Name</label>
                  <Input id="name" placeholder="Name" {...form.register("name")} disabled/>
                </div>
                <div className="flex flex-col space-y-1.5">
-                 <Label htmlFor="email">Email</Label>
+                 <label htmlFor="email">Email</label>
                  <Input id="email" placeholder="Email" {...form.register("email")} disabled/>
                </div>
                <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="status">Status</Label>
+                <label htmlFor="status">Status</label>
                 <Input id="status" placeholder="Status" {...form.register("status")} disabled/>
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                    <Label htmlFor="response">Response</Label>
+                    <label htmlFor="response">Response</label>
                     <textarea id="response" placeholder="Write your response here" value={responseText} onChange={handleResponseChange} />
                     </div>
             

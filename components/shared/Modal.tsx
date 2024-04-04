@@ -9,20 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import { Form } from "../ui/form";
 import { SupportTicketParams } from "@/lib/types/SupportTicketParams";
 import { updateSupportTicket } from "@/lib/actions/supportTicket.actions";
 import { useForm } from "react-hook-form";
-import { Dropdown } from 'flowbite-react';
 
 interface ModalProps {
     ticketData: SupportTicketParams | null;
@@ -69,7 +60,7 @@ export function Modal({ ticketData, onClose, onUpdateSuccess }: ModalProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <Card className="w-[350px]">
+      <Card className="relative w-[350px]">
         <CardHeader>
           <CardTitle>Update Ticket</CardTitle>
         </CardHeader>
@@ -78,17 +69,19 @@ export function Modal({ ticketData, onClose, onUpdateSuccess }: ModalProps) {
             <form onSubmit={form.handleSubmit(handleSubmit)}>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Name</Label>
+                  <label htmlFor="name">Name</label>
                   <Input id="name" placeholder="Name" {...form.register("name")} disabled/>
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="email">Email</Label>
+                  <label htmlFor="email">Email</label>
                   <Input id="email" placeholder="Email" {...form.register("email")} disabled/>
                 </div>
                 <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="status">Status</Label>
-                 <select id="status" {...form.register("status")}   className="block w-full px-3 py-2 mt-1 leading-tight bg-white border border-gray-300 text-sm rounded-md focus:outline-none focus:border-blue-500"
->
+                <label htmlFor="status">Status</label>
+                 <select 
+                 id="status" 
+                 {...form.register("status")}   
+                  className="block w-full px-3 py-2 mt-1 leading-tight bg-white border border-gray-300 text-sm rounded-md focus:outline-none focus:border-blue-500 absolute top-full left-0">
                     <option value="New">New</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Resolved">Resolved</option>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getAllTickets } from '@/lib/actions/supportTicket.actions';
 import { SupportTicketParams } from '@/lib/types/SupportTicketParams';
 
-import { columns, handleUpdateTicket} from '@/components/shared/Columns';
+import { columns } from '@/components/shared/Columns';
 import { DataTable } from '@/components/shared/Data-Table';
 
 import Link from 'next/link';
@@ -13,12 +13,7 @@ import { RespondModal } from '@/components/shared/RespondModal';
 import { fetchTicketById } from '@/lib/actions/supportTicket.actions';
 
 import { DeleteAlert } from '@/components/shared/DeleteAlert';
-
-import {
-    Alert,
-    AlertDescription,
-    AlertTitle,
-  } from "@/components/ui/alert";
+import { MobileList } from '@/components/shared/MobileList';
 
 export default function Page() {
 const [loading, setLoading] = useState(true);
@@ -79,21 +74,48 @@ const handleUpdateSuccess = async () => {
         fetchTickets();
     }, []);
 
-  return (
-    <div className="container mx-auto py-16">
-    {loading ? (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    ) : (
-      <>
-        <DataTable
-          columns={columns(openModalForTicketUpdate, openModalForTicketDelete, openModalForTicketRespond)}
-          data={supportTickets}
-          openModalForTicketDelete={openModalForTicketDelete}
-          openModalForTicketUpdate={openModalForTicketUpdate}
-          openModalForTicketRespond={openModalForTicketRespond}
-        />
+    const [isMobile, setIsMobile] = useState(false); 
+
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint value as needed
+  };
+
+  useEffect(() => {
+    handleResize(); // Set initial isMobile state
+    window.addEventListener('resize', handleResize); // Listen for screen resize events
+    return () => {
+      window.removeEventListener('resize', handleResize); // Clean up event listener
+    };
+  }, []);
+
+
+    return (
+      <div className="container mx-auto py-16">
+        {loading ? (
+          <div className="flex justify-center items-center h-screen">
+            <span className="loading loading-spinner loading-lg"></span>
+          </div>
+        ) : (
+          <>
+            <div className="md:flex md:flex-col">
+              {/* Render the appropriate component based on screen size */}
+              {isMobile ? (
+              <MobileList 
+                ticketData={supportTickets}
+                handleDeleteTicket={openModalForTicketDelete}
+                handleUpdateTicket={openModalForTicketUpdate}
+                handleRespondToTicket={openModalForTicketRespond}
+              />
+              ) : (
+                <DataTable
+                  columns={columns(openModalForTicketUpdate, openModalForTicketDelete, openModalForTicketRespond)}
+                  data={supportTickets}
+                  openModalForTicketDelete={openModalForTicketDelete}
+                  openModalForTicketUpdate={openModalForTicketUpdate}
+                  openModalForTicketRespond={openModalForTicketRespond}
+                />
+              )}
+            </div>
         {openModal && (
           <Modal
             onClose={() => setOpenModal(false)}

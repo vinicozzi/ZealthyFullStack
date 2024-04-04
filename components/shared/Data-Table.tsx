@@ -31,9 +31,8 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 
-  import { MoreHorizontal } from "lucide-react";
 
-
+import { getStatusColor } from "@/lib/utils"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input";
 
@@ -41,8 +40,8 @@ interface DataTableProps<TData, TValue> {
     openModalForTicketUpdate: (ticketId: string) => Promise<void>;
     openModalForTicketDelete: (ticketId: string) => Promise<void>;
     openModalForTicketRespond: (ticketId: string) => Promise<void>;
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+    columns: ColumnDef<TData, TValue>[]
+    data: TData[]
 }
 
 export function DataTable<TData, TValue>({
@@ -70,20 +69,6 @@ const table = useReactTable({
       columnFilters,
     },
   })
-
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-        case "New":
-            return "bg-red-500 text-red-50 rounded-full py-2 text-md text-center rounded-md ";
-          case "In Progress":
-            return "bg-yellow-300 text-yellow-50 rounded-full py-2 text-md text-center rounded-md ";
-          case "Resolved":
-            return "bg-green-500 rounded-full text-green-50 py-2 text-md text-center rounded-md ";
-          default:
-            return "";
-      }
-    };
 
   const handleFilterSelection = (filter: string) => {
     setSelectedFilter(filter);
@@ -117,16 +102,6 @@ const table = useReactTable({
           className="max-w-sm"
         />
       </div>
-      {/* <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter By Status..."
-          value={(table.getColumn("status")?.getFilterValue() as enum) ?? ""}
-          onChange={(event) =>
-            table.getColumn("status")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-      </div> */}
       <div className="flex items-center py-4">
             <DropdownMenu>
             <DropdownMenuTrigger asChild>

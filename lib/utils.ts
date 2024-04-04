@@ -16,3 +16,15 @@ export function formatDateTime(dateString: string, dateFormat = 'yyyy-MM-dd HH:m
   }
 }
 
+export const getStatusColor = (status: string) => {
+  switch (status) {
+      case "New":
+          return "bg-red-500 text-red-50 py-2 px-2 text-md text-center rounded-md ";
+        case "In Progress":
+          return "bg-yellow-300 text-yellow-50 py-2 px-2 text-md text-center rounded-md ";
+        case "Resolved":
+          return "bg-green-500 text-green-50 py-2 px-2 text-md text-center rounded-md ";
+        default:
+          return "";
+    }
+  };

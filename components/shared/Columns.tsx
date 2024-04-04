@@ -14,16 +14,7 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 
-// import { updateSupportTicket, deleteSupportTicket} from "@/lib/actions/supportTicket.actions";
 import { SupportTicketParams } from "@/lib/types/SupportTicketParams";
-
-// const handleDeleteTicket = (ticket: SupportTicketParams) => {
-//     console.log("Deleting ticket", ticket)
-// };
-
-// interface ColumnsProps {
-//     onTicketUpdate: (ticket: SupportTicketParams) => void;
-// }
 
 export const handleUpdateTicket = (ticketId: string, openModalForTicketUpdate: (ticketId: string) => void) => {
     openModalForTicketUpdate(ticketId);

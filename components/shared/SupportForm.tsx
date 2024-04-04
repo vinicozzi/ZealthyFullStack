@@ -19,7 +19,6 @@ import { z } from 'zod';
 
 import { createSupportTicket } from "@/lib/actions/supportTicket.actions";
 import { SupportTicketParams } from "@/lib/types/SupportTicketParams";
-import { Textarea } from "../ui/textarea";
 
 const SupportForm = () => {
     
@@ -44,7 +43,6 @@ const SupportForm = () => {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-    
         await createSupportTicket(ticketData as SupportTicketParams);
         setIsSubmitted(true);
         console.log('Support ticket submitted successfully!');
@@ -72,7 +70,7 @@ const SupportForm = () => {
                 <FormControl>
                   <Input className="shadow appearance-none border rounded w-full py-5 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Name" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage/>
               </FormItem>
             )}
           />
@@ -96,8 +94,8 @@ const SupportForm = () => {
               <FormItem key={field.name}>
                 <FormLabel className="block text-gray-700 text-lg font-bold mb-2">Description</FormLabel>
                 <FormControl>
-                  <Textarea
-                    className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none"
+                  <textarea
+                    className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     placeholder="Description"
                     {...field}
                   />
