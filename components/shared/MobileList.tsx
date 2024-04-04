@@ -14,7 +14,7 @@ interface MobileListProps {
 }
 
 export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTicket, handleDeleteTicket }: MobileListProps) {
-  const pageSize = 4; 
+  const pageSize = 3; 
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedTicket, setExpandedTicket] = useState<string | null>(null);
 
@@ -50,11 +50,11 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
                 </div>
               </div>
             </div>
-            {expandedTicket === ticket._id && (
+            {/* {expandedTicket === ticket._id && ( */}
               <div className="mt-2">
                 <p className="text-xs font-semibold text-gray-900">{ticket.description}</p>
               </div>
-            )}
+            {/* )} */}
             <div className="flex justify-between mt-2 text-xs">
               <div>
                 <label className="text-gray-500">

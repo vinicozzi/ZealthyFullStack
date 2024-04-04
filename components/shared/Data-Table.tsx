@@ -32,7 +32,7 @@ import {
   } from "@/components/ui/dropdown-menu"
 
 
-import { getStatusColor } from "@/lib/utils"
+// import { getStatusColor } from "@/lib/utils"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input";
 
@@ -78,6 +78,19 @@ const table = useReactTable({
       table.getColumn("status")?.setFilterValue(filter);
     }
   };
+
+   const getStatusColor = (status: string) => {
+    switch (status) {
+        case "New":
+            return "bg-red-500 text-red-50 py-2 px-2 text-md text-center rounded-md ";
+          case "In Progress":
+            return "bg-yellow-300 text-yellow-50 py-2 px-2 text-md text-center rounded-md ";
+          case "Resolved":
+            return "bg-green-500 text-green-50 py-2 px-2 text-md text-center rounded-md ";
+          default:
+            return "";
+      }
+    };
 
 
   return (
