@@ -58,6 +58,7 @@ const openModalForTicketRespond = async (ticketId: string) => {
 const fetchTickets = async () => {
     try {
       const tickets = await getAllTickets();
+      tickets.sort((a: SupportTicketParams, b: SupportTicketParams) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       setSupportTickets(tickets);
       setLoading(false);
     } catch (error) {
@@ -77,14 +78,14 @@ const handleUpdateSuccess = async () => {
     const [isMobile, setIsMobile] = useState(false); 
 
   const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768); // Adjust the breakpoint value as needed
+    setIsMobile(window.innerWidth <= 768); 
   };
 
   useEffect(() => {
-    handleResize(); // Set initial isMobile state
-    window.addEventListener('resize', handleResize); // Listen for screen resize events
+    handleResize(); 
+    window.addEventListener('resize', handleResize); 
     return () => {
-      window.removeEventListener('resize', handleResize); // Clean up event listener
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -98,7 +99,6 @@ const handleUpdateSuccess = async () => {
         ) : (
           <>
             <div className="md:flex md:flex-col">
-              {/* Render the appropriate component based on screen size */}
               {isMobile ? (
               <MobileList 
                 ticketData={supportTickets}
