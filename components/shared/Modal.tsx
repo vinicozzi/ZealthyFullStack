@@ -60,7 +60,7 @@ export function Modal({ ticketData, onClose, onUpdateSuccess }: ModalProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <Card className="relative w-[350px]">
+      <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Update Ticket</CardTitle>
         </CardHeader>
@@ -78,10 +78,7 @@ export function Modal({ ticketData, onClose, onUpdateSuccess }: ModalProps) {
                 </div>
                 <div className="flex flex-col space-y-1.5">
                 <label htmlFor="status">Status</label>
-                 <select 
-                 id="status" 
-                 {...form.register("status")}   
-                  className="block w-full px-3 py-2 mt-1 leading-tight bg-white border border-gray-300 text-sm rounded-md focus:outline-none focus:border-blue-500 absolute top-full left-0">
+                 <select id="status" {...form.register("status")}   className="block w-full px-3 py-2 mt-1 leading-tight bg-white border border-gray-300 text-sm rounded-md focus:outline-none focus:border-blue-500">
                     <option value="New">New</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Resolved">Resolved</option>
