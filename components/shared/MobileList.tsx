@@ -120,6 +120,9 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
           </div>
         ))}
       </div>
+      {displayedTickets.length === 0? (
+          <div className="text-center text-gray-500 mt-4 font-bold">No results found</div>
+          ) : (
       <div className="flex items-center mt-8 space-x-2">
         <Button 
           disabled={currentPage === 1} 
@@ -139,6 +142,7 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
           Next
         </Button>
       </div>
+      )}
     </div>
   );
 }
