@@ -15,7 +15,7 @@ interface MobileListProps {
 }
 
 export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTicket, handleDeleteTicket }: MobileListProps) {
-  const pageSize = 5; 
+  const pageSize = 3; 
   const [currentPage, setCurrentPage] = useState(1);
   const [filterName, setFilterName] = useState("");
   const [filterEmail, setFilterEmail] = useState("");
