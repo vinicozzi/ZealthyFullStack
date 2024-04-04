@@ -91,7 +91,7 @@ const handleUpdateSuccess = async () => {
 
 
     return (
-      <div className="container mx-auto py-16">
+      <div className="container mx-auto py-16 bg-white">
         {loading ? (
           <div className="flex justify-center items-center h-screen">
             <span className="loading loading-spinner loading-lg"></span>
