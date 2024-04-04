@@ -46,7 +46,7 @@ export function MobileList({ ticketData, handleUpdateTicket, handleRespondToTick
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-white min-h-screen">
+    <div className="flex flex-col items-center justify-center p-4 ">
       <div className="w-full space-y-4">
         <div className="flex space-x-4">
           <select
