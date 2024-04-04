@@ -56,15 +56,15 @@ const openModalForTicketRespond = async (ticketId: string) => {
 }
 
 const fetchTickets = async () => {
-    try {
-      const tickets = await getAllTickets();
-      tickets.sort((a: SupportTicketParams, b: SupportTicketParams) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      setSupportTickets(tickets);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching tickets:', error);
-    }
-  };
+  try {
+    const tickets = await getAllTickets();
+    tickets.sort((a: SupportTicketParams, b: SupportTicketParams) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    setSupportTickets(tickets);
+    setLoading(false);
+  } catch (error) {
+    console.error('Error fetching tickets:', error);
+  }
+};
 
 const handleUpdateSuccess = async () => {
     await fetchTickets();
